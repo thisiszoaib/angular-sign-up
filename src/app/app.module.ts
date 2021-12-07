@@ -12,7 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -32,7 +31,6 @@ import { LandingComponent } from './components/landing/landing.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDividerModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
