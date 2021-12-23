@@ -1,9 +1,19 @@
 <mat-toolbar color="primary">
     Sign up Flow with Firebase
-    <button mat-button routerLink="login">
-        <mat-icon>login</mat-icon>
-        Login
-    </button>
+
+    <ng-container *ngIf="authService.currentUser$ | async as user; else loginButton">
+        <button mat-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+        </button>
+    </ng-container>
+
+    <ng-template #loginButton>
+        <button mat-button routerLink="login">
+            <mat-icon>login</mat-icon>
+            Login
+        </button>
+    </ng-template>
 </mat-toolbar>
 
 <div class="content">
