@@ -4,14 +4,14 @@
 
 export const environment = {
   firebase: {
-    projectId: 'angular-sign-up',
-    appId: '1:916691174045:web:677a900ca493c7d0e9ca74',
-    storageBucket: 'angular-sign-up.appspot.com',
-    apiKey: 'AIzaSyAaS6ztStcHbGSznGNBchaa_ZN5B02Zk6c',
-    authDomain: 'angular-sign-up.firebaseapp.com',
-    messagingSenderId: '916691174045',
+    apiKey: 'AIzaSyChyrQOvph3mZt6Sqi2ErZD5FknLvi7n40',
+    authDomain: 'angular-sign-up-719ed.firebaseapp.com',
+    projectId: 'angular-sign-up-719ed',
+    storageBucket: 'angular-sign-up-719ed.appspot.com',
+    messagingSenderId: '378550273300',
+    appId: '1:378550273300:web:494c048877b2fdaaf62e01',
   },
-  production: false
+  production: false,
 };
 
 /*

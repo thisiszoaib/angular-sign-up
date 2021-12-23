@@ -19,6 +19,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { LandingComponent } from './components/landing/landing.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, SignUpComponent, LandingComponent, HomeComponent],
@@ -35,7 +36,8 @@ import { LandingComponent } from './components/landing/landing.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    HotToastModule.forRoot()
+    HotToastModule.forRoot(),
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],
