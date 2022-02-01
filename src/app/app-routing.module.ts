@@ -5,7 +5,12 @@ import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
-import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import {
+  canActivate,
+  redirectUnauthorizedTo,
+  redirectLoggedInTo,
+} from '@angular/fire/auth-guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['home']);
@@ -14,32 +19,33 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: LandingComponent
+    component: LandingComponent,
   },
   {
     path: 'login',
     component: LoginComponent,
-    ...canActivate(redirectToHome)
+    ...canActivate(redirectToHome),
   },
   {
     path: 'sign-up',
     component: SignUpComponent,
-    ...canActivate(redirectToHome)
+    ...canActivate(redirectToHome),
   },
   {
     path: 'home',
     component: HomeComponent,
-    ...canActivate(redirectToLogin)
-  }
+    ...canActivate(redirectToLogin),
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    ...canActivate(redirectToLogin),
+  },
 ];
-
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
-  ],
-  exports: [RouterModule]
+  imports: [CommonModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
