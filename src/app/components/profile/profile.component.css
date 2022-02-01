@@ -1,5 +1,7 @@
 .profile-image {
   position: relative;
+  width: 120px;
+  margin: auto;
 }
 
 .profile-image > img {
@@ -11,5 +13,14 @@
 .profile-image > button {
   position: absolute;
   bottom: 10px;
-  right: 80px;
+  right: 0;
+}
+
+.form-container {
+  max-width: 400px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
 }

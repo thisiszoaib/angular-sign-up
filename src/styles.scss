@@ -1,31 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .form-container {
-    display: block;
-    max-width: 300px;
-    margin: auto;
+  display: block;
+  max-width: 300px;
+  margin: auto;
 
-    background: #eceff1;
-    padding: 48px;
-    border-radius: 16px;
+  background: #eceff1;
+  padding: 48px;
+  border-radius: 16px;
 
-    mat-form-field {
-        width: 100%;
-    }
+  mat-form-field {
+    width: 100%;
+  }
 }
 
 .center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .margin-top {
-    margin-top: 16px;
+  margin-top: 16px !important;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
