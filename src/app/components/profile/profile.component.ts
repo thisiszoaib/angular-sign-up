@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { User } from 'firebase/auth';
-import { forkJoin, switchMap, tap } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
+import { switchMap, tap } from 'rxjs';
+import { ProfileUser } from 'src/app/models/user';
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -15,7 +14,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  user$ = this.authService.currentUser$;
+  user$ = this.usersService.currentUserProfile$;
 
   profileForm = new FormGroup({
     uid: new FormControl(''),
@@ -27,7 +26,6 @@ export class ProfileComponent implements OnInit {
   });
 
   constructor(
-    private authService: AuthService,
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
     private usersService: UsersService
@@ -41,7 +39,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  uploadFile(event: any, { uid }: User) {
+  uploadFile(event: any, { uid }: ProfileUser) {
     this.imageUploadService
       .uploadImage(event.target.files[0], `images/profile/${uid}`)
       .pipe(
@@ -50,17 +48,12 @@ export class ProfileComponent implements OnInit {
           success: 'Image uploaded successfully',
           error: 'There was an error in uploading the image',
         }),
-        switchMap((photoURL) => {
-          const updatePhotoInAuth = this.authService.updateProfile({
-            photoURL,
-          });
-          const updatePhotoInProfile = this.usersService.updateUser({
+        switchMap((photoURL) =>
+          this.usersService.updateUser({
             uid,
             photoURL,
-          });
-
-          return forkJoin([updatePhotoInAuth, updatePhotoInProfile]);
-        })
+          })
+        )
       )
       .subscribe();
   }
@@ -70,11 +63,6 @@ export class ProfileComponent implements OnInit {
     this.usersService
       .updateUser(profileData)
       .pipe(
-        switchMap(() =>
-          this.authService.updateProfile({
-            displayName: profileData.displayName,
-          })
-        ),
         this.toast.observe({
           loading: 'Saving profile data...',
           success: 'Profile updated successfully',

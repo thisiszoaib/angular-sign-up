@@ -1,8 +1,6 @@
 <mat-toolbar color="primary">
   Sign Up Flow with Firebase
-  <ng-container
-    *ngIf="authService.currentUser$ | async as user; else loginButton"
-  >
+  <ng-container *ngIf="user$ | async as user; else loginButton">
     <button mat-button [matMenuTriggerFor]="userMenu">
       <img
         width="30"

@@ -78,13 +78,9 @@ export class SignUpComponent implements OnInit {
     this.authService
       .signUp(email, password)
       .pipe(
-        switchMap(({ user: { uid } }) => {
-          const profileUser = { uid, email, displayName: name };
-          const updateUserInAuth = this.authService.updateProfile(profileUser);
-          const addUserInDb = this.usersService.addUser(profileUser);
-
-          return forkJoin([updateUserInAuth, addUserInDb]);
-        }),
+        switchMap(({ user: { uid } }) =>
+          this.usersService.addUser({ uid, email, displayName: name })
+        ),
         this.toast.observe({
           success: 'Congrats! You are all signed up',
           loading: 'Signing up...',

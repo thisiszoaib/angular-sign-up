@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   doc,
+  docData,
   Firestore,
   getDoc,
   setDoc,
@@ -20,22 +21,21 @@ export class UsersService {
     return this.authService.currentUser$.pipe(
       switchMap((user) => {
         if (!user?.uid) {
-          throw new Error('No UID found');
+          return of(null);
         }
 
         const ref = doc(this.firestore, 'users', user.uid);
-        return getDoc(ref);
-      }),
-      map((snapshot) => snapshot.data())
+        return docData(ref);
+      })
     );
   }
 
-  addUser(user: ProfileUser): Observable<any> {
+  addUser(user: ProfileUser): Observable<void> {
     const ref = doc(this.firestore, 'users', user.uid);
     return from(setDoc(ref, user));
   }
 
-  updateUser(user: ProfileUser): Observable<any> {
+  updateUser(user: ProfileUser): Observable<void> {
     const ref = doc(this.firestore, 'users', user.uid);
     return from(updateDoc(ref, { ...user }));
   }

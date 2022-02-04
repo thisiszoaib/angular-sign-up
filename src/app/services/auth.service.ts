@@ -26,16 +26,16 @@ export class AuthService {
     return from(signInWithEmailAndPassword(this.auth, email, password));
   }
 
-  updateProfile(profileData: Partial<UserInfo>): Observable<any> {
-    const user = this.auth.currentUser;
-    return of(user).pipe(
-      concatMap((user) => {
-        if (!user) throw new Error('Not authenticated');
+  // updateProfile(profileData: Partial<UserInfo>): Observable<any> {
+  //   const user = this.auth.currentUser;
+  //   return of(user).pipe(
+  //     concatMap((user) => {
+  //       if (!user) throw new Error('Not authenticated');
 
-        return updateProfile(user, profileData);
-      })
-    );
-  }
+  //       return updateProfile(user, profileData);
+  //     })
+  //   );
+  // }
 
   logout(): Observable<any> {
     return from(this.auth.signOut());
