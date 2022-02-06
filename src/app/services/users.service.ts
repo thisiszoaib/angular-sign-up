@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  collection,
   doc,
   docData,
   Firestore,
@@ -17,15 +18,15 @@ import { AuthService } from './auth.service';
 export class UsersService {
   constructor(private firestore: Firestore, private authService: AuthService) {}
 
-  get currentUserProfile$(): Observable<any> {
+  get currentUserProfile$(): Observable<ProfileUser | null> {
     return this.authService.currentUser$.pipe(
       switchMap((user) => {
         if (!user?.uid) {
           return of(null);
         }
 
-        const ref = doc(this.firestore, 'users', user.uid);
-        return docData(ref);
+        const ref = doc(this.firestore, 'users', user?.uid);
+        return docData(ref) as Observable<ProfileUser>;
       })
     );
   }
